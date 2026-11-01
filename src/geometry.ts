@@ -39,6 +39,21 @@ export const ORIGIN = { x: 60, y: 108 };
 /** Laughing and sleeping eyes, drawn around each eye's centre. */
 export const happyEye = (cx: number, cy: number) => `M${cx - 6} ${cy + 3}Q${cx} ${cy - 7} ${cx + 6} ${cy + 3}`;
 export const shutEye = (cx: number, cy: number) => `M${cx - 6} ${cy + 1}Q${cx} ${cy + 5} ${cx + 6} ${cy + 1}`;
+/**
+ * Dizzy eyes: a spiral of two and a quarter turns from each eye's centre, the one sign of the
+ * dizzy state (it turns; the body wobbles under it).
+ */
+export const spiralEye = (cx: number, cy: number) => {
+  const turns = 2.25;
+  const steps = Math.round(turns * 24);
+  const points: string[] = [];
+  for (let i = 0; i <= steps; i++) {
+    const a = (i / steps) * turns * 2 * Math.PI;
+    const r = 0.8 + (i / steps) * 5.4;
+    points.push(`${(cx + r * Math.cos(a)).toFixed(2)} ${(cy + r * Math.sin(a)).toFixed(2)}`);
+  }
+  return `M${points.join("L")}`;
+};
 /** A short brow above an eye. */
 export const brow = (cx: number, cy: number) => `M${cx - 5} ${cy - 14}L${cx + 5} ${cy - 14}`;
 
