@@ -1,0 +1,70 @@
+{
+  "name": "@nestor-home/character",
+  "version": "0.1.0",
+  "description": "Nestor's character: the ink pebble, its states and its dither, for the web and React.",
+  "keywords": [
+    "nestor",
+    "character",
+    "mascot",
+    "svg",
+    "react",
+    "dither"
+  ],
+  "homepage": "https://nestor.mathislambert.fr",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nestor-home/nestor-character.git"
+  },
+  "bugs": "https://github.com/nestor-home/nestor-character/issues",
+  "license": "MIT",
+  "author": "Mathis Lambert",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "packageManager": "pnpm@12.14.0",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "default": "./dist/react.js"
+    },
+    "./nestor.css": "./dist/nestor.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/nestor.css dist/",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "vitest run",
+    "package:check": "pnpm build && publint --strict && attw --pack . --profile esm-only --exclude-entrypoints ./nestor.css"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
+    "@biomejs/biome": "2.6.4",
+    "@types/react": "19.3.0",
+    "publint": "0.3.25",
+    "react": "19.3.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.5"
+  }
+}
