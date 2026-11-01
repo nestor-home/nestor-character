@@ -27,8 +27,14 @@ describe("the character's drawing", () => {
     expect(renderNestor({ attributes: { "on click": "x", "data-x": '"' } })).not.toContain("on click");
   });
 
-  it("knows eight states", () => {
-    expect(STATES).toHaveLength(8);
+  it("knows nine states", () => {
+    expect(STATES).toHaveLength(9);
+  });
+
+  it("draws spiral eyes for when it is dizzy, hidden in every other state", () => {
+    const svg = renderNestor({ state: "dizzy" });
+    expect(svg).toContain('data-state="dizzy"');
+    expect(svg).toMatch(/<g class="nestor-dizzy">(<path d="M[^"]+L[^"]+"\/>){2}<\/g>/);
   });
 });
 

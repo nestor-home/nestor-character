@@ -47,7 +47,8 @@
   transition: transform 90ms ease-out;
 }
 .nestor .nestor-happy,
-.nestor .nestor-shut {
+.nestor .nestor-shut,
+.nestor .nestor-dizzy {
   fill: none;
   stroke: var(--nestor-paper);
   stroke-width: 3.6;
@@ -247,6 +248,26 @@
   transform: rotate(8deg);
 }
 
+/* dizzy: spiral eyes (the sign), turning, and the body wobbling under them */
+.nestor .nestor-dizzy path {
+  stroke-width: 2.2;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.nestor[data-state="dizzy"] .nestor-iris,
+.nestor[data-state="dizzy"] .nestor-lid {
+  opacity: 0;
+}
+.nestor[data-state="dizzy"] .nestor-dizzy {
+  opacity: 1;
+}
+.nestor[data-state="dizzy"] .nestor-dizzy path {
+  animation: nestor-spin 1.3s linear infinite;
+}
+.nestor[data-state="dizzy"] .nestor-breath {
+  animation: nestor-wobble 1.5s ease-in-out infinite;
+}
+
 /* small sizes keep only the silhouette, the eyes and the mouth */
 .nestor--tiny .nestor-breath,
 .nestor--tiny .nestor-mouth {
@@ -342,6 +363,18 @@
 @keyframes nestor-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+@keyframes nestor-wobble {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg) translateX(-1px);
+  }
+  75% {
+    transform: rotate(5deg) translateX(1px);
   }
 }
 @keyframes nestor-bob {

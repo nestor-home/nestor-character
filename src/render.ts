@@ -18,6 +18,7 @@ import {
   SOUND,
   SPINNER,
   shutEye,
+  spiralEye,
   THOUGHTS,
   TUFT,
   VIEWBOX,
@@ -32,6 +33,7 @@ export const STATES = [
   "sleeping",
   "working",
   "concerned",
+  "dizzy",
 ] as const;
 export type NestorState = (typeof STATES)[number];
 
@@ -101,6 +103,7 @@ export function renderNestor({
     `<g class="nestor-eyes">${eyes}`,
     `<g class="nestor-happy">${EYES.map((e) => `<path d="${happyEye(e.cx, e.cy)}"/>`).join("")}</g>`,
     `<g class="nestor-shut">${EYES.map((e) => `<path d="${shutEye(e.cx, e.cy)}"/>`).join("")}</g>`,
+    `<g class="nestor-dizzy">${EYES.map((e) => `<path d="${spiralEye(e.cx, e.cy)}"/>`).join("")}</g>`,
     `</g>`,
     `<rect class="nestor-mouth" x="${MOUTH.x}" y="${MOUTH.y}" width="${MOUTH.width}" height="${MOUTH.height}"/>`,
     `</g></g></g>`,

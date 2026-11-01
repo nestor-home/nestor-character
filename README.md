@@ -2,7 +2,7 @@
 
 Nestor's character, the one face of the [Nestor](https://github.com/nestor-home/nestor) home
 assistant on every screen: an ink pebble with a quiff, two paper eyes, an ember cursor for a mouth
-and a small bow tie. It comes as SVG markup any page can inline, eight states in CSS, a small
+and a small bow tie. It comes as SVG markup any page can inline, nine states in CSS, a small
 controller that brings it to life, a React component, the logo and the Bayer dither around it.
 
 ## Install
@@ -26,7 +26,7 @@ nestor.state = "thinking";
 ```
 
 States: `idle`, `listening`, `thinking`, `speaking`, `laughing`, `sleeping`, `working`,
-`concerned`. Colours follow the page's `--ink`, `--paper` and `--ember` custom properties. The
+`concerned`, `dizzy` (spiral eyes; under reduced motion they stay still). Colours follow the page's `--ink`, `--paper` and `--ember` custom properties. The
 controller pauses off screen and when the tab is hidden, and holds a static pose under
 `prefers-reduced-motion`.
 
