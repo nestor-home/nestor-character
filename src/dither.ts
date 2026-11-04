@@ -69,6 +69,57 @@ export function drawDither(canvas: HTMLCanvasElement): void {
   }
 }
 
+/** How full the breathing texture is at `seconds`: from 0.7 to 1 of its density and back, every `period`. */
+export function breathing(seconds: number, period = 2.4): number {
+  return 0.85 + 0.15 * Math.sin((seconds * 2 * Math.PI) / period);
+}
+
+export interface BreathingOptions {
+  /** seconds for one breath (default 2.4) */
+  period?: number;
+  /** milliseconds between frames (default 80: about twelve a second, plenty for dots) */
+  frame?: number;
+}
+
+/**
+ * The texture breathing on its canvas: its density swells and ebbs around the `data-from` and
+ * `data-to` it was given, so dots light up and go out across it. Drawn once and left still under
+ * `prefers-reduced-motion`; paused while the canvas is off screen or the tab hidden. Returns the
+ * function that stops it.
+ */
+export function animateDither(
+  canvas: HTMLCanvasElement,
+  { period = 2.4, frame = 80 }: BreathingOptions = {},
+): () => void {
+  const from = Number(canvas.dataset.from ?? 0);
+  const to = Number(canvas.dataset.to ?? 0.6);
+  drawDither(canvas);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return () => {};
+  let visible = true;
+  const seen = new IntersectionObserver(([entry]) => {
+    visible = entry?.isIntersecting ?? true;
+  });
+  seen.observe(canvas);
+  let last = 0;
+  let request = 0;
+  const tick = (now: number) => {
+    request = requestAnimationFrame(tick);
+    if (!visible || now - last < frame) return;
+    last = now;
+    const swell = breathing(now / 1000, period);
+    canvas.dataset.from = String(from * swell);
+    canvas.dataset.to = String(to * swell);
+    drawDither(canvas);
+  };
+  request = requestAnimationFrame(tick);
+  return () => {
+    cancelAnimationFrame(request);
+    seen.disconnect();
+    canvas.dataset.from = String(from);
+    canvas.dataset.to = String(to);
+  };
+}
+
 /** The same texture as an SVG string (for the Open Graph images, drawn without a canvas). */
 export function ditherSvg(
   shape: DitherShape,
