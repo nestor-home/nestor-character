@@ -1,6 +1,6 @@
 {
   "name": "@nestor-home/character",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Nestor's character: the ink pebble, its states and its dither, for the web and React.",
   "keywords": [
     "nestor",
