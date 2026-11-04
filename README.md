@@ -32,7 +32,8 @@ controller pauses off screen and when the tab is hidden, and holds a static pose
 
 Also exported: `renderLogo()` (the wordmark and its bow tie), `renderBowTie()`,
 `renderMarkStill()` (the monogram, for icons), `renderNestorStill()` (written colours, for favicons
-and sharing images), `drawDither(canvas)` and `ditherSvg()` (the texture), and `geometry` (the shapes
+and sharing images), `drawDither(canvas)`, `animateDither(canvas)` (the texture breathing, still under reduced motion; it
+returns its stop) and `ditherSvg()` (the texture), and `geometry` (the shapes
 as data).
 
 ## React

@@ -14,10 +14,21 @@
  * React: `import { Nestor } from "@nestor-home/character/react"`. Stills with written colours
  * (favicons, avatars, sharing images): `renderNestorStill(size, PALETTES.light)`.
  *
- * The texture behind it: `drawDither(canvas)` on a canvas sized by CSS (see dither.ts).
+ * The texture behind it: `drawDither(canvas)` on a canvas sized by CSS, `animateDither(canvas)` to
+ * make it breathe (see dither.ts).
  */
 export { type ControllerOptions, ease, type Gaze, gazeToward, NestorController, speakingTime } from "./controller.js";
-export { BAYER, type DitherShape, density, ditherSvg, drawDither, lit } from "./dither.js";
+export {
+  animateDither,
+  BAYER,
+  type BreathingOptions,
+  breathing,
+  type DitherShape,
+  density,
+  ditherSvg,
+  drawDither,
+  lit,
+} from "./dither.js";
 export * as geometry from "./geometry.js";
 export {
   type BowTieOptions,
