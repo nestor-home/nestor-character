@@ -48,9 +48,11 @@ import { Nestor } from "@nestor-home/character/react";
 ## Develop
 
 ```bash
-pnpm install
+pnpm install   # also installs a pre-push hook (lefthook): Biome and the typecheck
 pnpm lint && pnpm typecheck && pnpm test && pnpm package:check
 ```
+
+Test files run in a random order; a failure prints its seed, and `pnpm test --sequence.seed=<seed>` replays it.
 
 ## License
 
